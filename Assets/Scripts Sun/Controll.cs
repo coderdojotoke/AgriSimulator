@@ -9,18 +9,25 @@ public class Controll : MonoBehaviour
     public InputField inputFieldx;
     public InputField inputFieldy;
     public InputField inputFieldz;
+    //public InputField inputRotate;
     private GameObject selectObject;
     private InputField setFieldx;
     private InputField setFieldy;
     private InputField setFieldz;
+    //private InputField setRotate;
     private float setFieldFloatx;
     private float setFieldFloaty;
     private float setFieldFloatz;
+    //private float setFloatRotate;
     public Button btn;
     private string tagName;
     private bool isDragging;
     private float depth2;
     public GameObject myPrefub;
+    public InputField inputFieldRotateY; // ←【追加】Y軸回転用のInputField
+    private InputField setFieldRotateY;  // ←【追加】Y軸回転用の内部参照
+    private float setFloatRotateY;      // ←【追加】Y軸回転値
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -28,8 +35,10 @@ public class Controll : MonoBehaviour
         inputFieldx = inputFieldx.GetComponent<InputField>();
         inputFieldy = inputFieldy.GetComponent<InputField>();
         inputFieldz = inputFieldz.GetComponent<InputField>();
+        //inputRotate = inputRotate.GetComponent<InputField>();
         btn = btn.GetComponent<Button>();
         btn.interactable = false;
+        inputFieldRotateY = inputFieldRotateY.GetComponent<InputField>(); 
     }
 
 
@@ -48,6 +57,8 @@ public class Controll : MonoBehaviour
                     inputFieldx.text = selectObject.transform.localScale.x.ToString("F0");
                     inputFieldy.text = selectObject.transform.localScale.y.ToString("F0");
                     inputFieldz.text = selectObject.transform.localScale.z.ToString("F0");
+                    inputFieldRotateY.text = selectObject.transform.eulerAngles.y.ToString("F0"); // ←【追加】Y軸回転値を表示
+                    //inputRotate.text = selectObject.transform.rotation.ToString("F0");
                     isDragging = true;
                     Vector3 screenPoint = Camera.main.WorldToScreenPoint(selectObject.transform.position);
                     depth2 = screenPoint.z;
@@ -82,9 +93,11 @@ public class Controll : MonoBehaviour
         setFieldx = inputFieldx.GetComponent<InputField>();
         setFieldy = inputFieldy.GetComponent<InputField>();
         setFieldz = inputFieldz.GetComponent<InputField>();
+        //setRotate = inputRotate.GetComponent<InputField>();
         setFieldFloatx = float.Parse(setFieldx.text);
         setFieldFloaty = float.Parse(setFieldy.text);
         setFieldFloatz = float.Parse(setFieldz.text);
+        //setFloatRotate = float.Parse(setRotate.text);
         //Debug.Log(setFieldFloatx);
         Vector3 scale = selectObject.transform.localScale;
         float width = scale.x;
@@ -94,6 +107,15 @@ public class Controll : MonoBehaviour
         height = setFieldFloaty;
         depth = setFieldFloatz;
         selectObject.transform.localScale = new Vector3(width, height, depth);
+        //selectObject. = Quaternion.Euler(0, angle, 0);
+        setFieldRotateY = inputFieldRotateY.GetComponent<InputField>(); // ←【追加】Y軸回転InputFieldの取得
+        setFloatRotateY = float.Parse(setFieldRotateY.text);            // ←【追加】Y軸回転値の取得
+
+        // ←【追加】回転処理（Y軸のみ変更）
+        Vector3 currentRotation = selectObject.transform.eulerAngles;
+        selectObject.transform.rotation = Quaternion.Euler(currentRotation.x, setFloatRotateY, currentRotation.z);
+
+
         btn.interactable = false;
 
     }

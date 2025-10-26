@@ -27,7 +27,7 @@ public class GrassDelete : MonoBehaviour
     {
         if (other.gameObject.tag == "Box")
         {
-            nokori.value += 5;
+            nokori.value -= 5;
             ClearGrass(transform.position, grassClearRadius);
             Destroy(other);
         }

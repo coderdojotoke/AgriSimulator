@@ -3,17 +3,18 @@ using Unity.Mathematics;
 using UnityEngine;
 //using UnityEngine.AI;
 using UnityEngine.UI;
+using TMPro;
 
 public class Controll : MonoBehaviour
 {
-    public InputField inputFieldx;
-    public InputField inputFieldy;
-    public InputField inputFieldz;
+    public TMP_InputField inputFieldx;
+    public TMP_InputField inputFieldy;
+    public TMP_InputField inputFieldz;
     //public InputField inputRotate;
     private GameObject selectObject;
-    private InputField setFieldx;
-    private InputField setFieldy;
-    private InputField setFieldz;
+    private TMP_InputField setFieldx;
+    private TMP_InputField setFieldy;
+    private TMP_InputField setFieldz;
     //private InputField setRotate;
     private float setFieldFloatx;
     private float setFieldFloaty;
@@ -24,21 +25,21 @@ public class Controll : MonoBehaviour
     private bool isDragging;
     private float depth2;
     public GameObject myPrefub;
-    public InputField inputFieldRotateY; // ←【追加】Y軸回転用のInputField
-    private InputField setFieldRotateY;  // ←【追加】Y軸回転用の内部参照
+    public TMP_InputField inputFieldRotateY; // ←【追加】Y軸回転用のInputField
+    private TMP_InputField setFieldRotateY;  // ←【追加】Y軸回転用の内部参照
     private float setFloatRotateY;      // ←【追加】Y軸回転値
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        inputFieldx = inputFieldx.GetComponent<InputField>();
-        inputFieldy = inputFieldy.GetComponent<InputField>();
-        inputFieldz = inputFieldz.GetComponent<InputField>();
+        inputFieldx = inputFieldx.GetComponent<TMP_InputField>();
+        inputFieldy = inputFieldy.GetComponent<TMP_InputField>();
+        inputFieldz = inputFieldz.GetComponent<TMP_InputField>();
         //inputRotate = inputRotate.GetComponent<InputField>();
         btn = btn.GetComponent<Button>();
         btn.interactable = false;
-        inputFieldRotateY = inputFieldRotateY.GetComponent<InputField>(); 
+        inputFieldRotateY = inputFieldRotateY.GetComponent<TMP_InputField>(); 
     }
 
 
@@ -90,9 +91,9 @@ public class Controll : MonoBehaviour
     
     public void ONButtonClick()
     {
-        setFieldx = inputFieldx.GetComponent<InputField>();
-        setFieldy = inputFieldy.GetComponent<InputField>();
-        setFieldz = inputFieldz.GetComponent<InputField>();
+        setFieldx = inputFieldx.GetComponent<TMP_InputField>();
+        setFieldy = inputFieldy.GetComponent<TMP_InputField>();
+        setFieldz = inputFieldz.GetComponent<TMP_InputField>();
         //setRotate = inputRotate.GetComponent<InputField>();
         setFieldFloatx = float.Parse(setFieldx.text);
         setFieldFloaty = float.Parse(setFieldy.text);
@@ -108,7 +109,7 @@ public class Controll : MonoBehaviour
         depth = setFieldFloatz;
         selectObject.transform.localScale = new Vector3(width, height, depth);
         //selectObject. = Quaternion.Euler(0, angle, 0);
-        setFieldRotateY = inputFieldRotateY.GetComponent<InputField>(); // ←【追加】Y軸回転InputFieldの取得
+        setFieldRotateY = inputFieldRotateY.GetComponent<TMP_InputField>(); // ←【追加】Y軸回転InputFieldの取得
         setFloatRotateY = float.Parse(setFieldRotateY.text);            // ←【追加】Y軸回転値の取得
 
         // ←【追加】回転処理（Y軸のみ変更）

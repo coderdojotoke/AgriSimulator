@@ -15,7 +15,7 @@ public class CubeMoveDrone : MonoBehaviour
     public AudioClip upSound;
     private AudioSource cubeAudio;
     public bool soundBool;
-     public float speed = 0.1f;
+    public float speed = 0.1f;
     public float updownSpeed = 0.01f; 
     public float targetHeight = 4.0f;       // 上昇目標
     public float fallTargetHeight = 1.0f;   // 下降目標

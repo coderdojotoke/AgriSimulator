@@ -1,5 +1,7 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+
 
 public class GrassDelete : MonoBehaviour
 {
@@ -11,16 +13,30 @@ public class GrassDelete : MonoBehaviour
     public Text nokoriText;
     public int nokoriTextText;
     public int pasent = 100;
+    //public TextMeshPro timerText; // UIのTextコンポーネントをアタッチ
+    public TextMeshProUGUI timerText;
+
+    private float elapsedTime = 0f; // 経過時間
+    private bool isRunning = false; // ストップウォッチの状態
+    public TextMeshProUGUI Timetext;
 
     void Start()
     {
         terrain = Terrain.activeTerrain;
         TerrainData runtimeData = Instantiate(terrain.terrainData);
         terrain.terrainData = runtimeData;
+        elapsedTime = 0f;
+        isRunning = true;
     }
 
     void Update()
     {
+         if (isRunning)
+        {
+            elapsedTime += Time.deltaTime; // 経過時間を加算
+            int seconds = Mathf.FloorToInt(elapsedTime); // 秒単位に変換
+            timerText.text = seconds.ToString(); // テキストに表示
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -33,7 +49,11 @@ public class GrassDelete : MonoBehaviour
         }
         else if (other.gameObject.tag == "GameClear")
         {
+            isRunning = false;
+            //Timetext = timerText;
             canvas.gameObject.SetActive(true);
+            Timetext.text = "今回のタイム:" + elapsedTime.ToString("F0") + "秒";
+            Debug.Log(timerText);
         }
     }
 

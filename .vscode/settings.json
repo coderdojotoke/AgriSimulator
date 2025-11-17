@@ -56,5 +56,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Grass.sln"
+    "dotnet.defaultSolution": "Agri.sln"
 }

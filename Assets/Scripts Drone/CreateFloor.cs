@@ -16,6 +16,10 @@ public class CreateFloor : MonoBehaviour
 
     void Start()
     {
+        if (tuihinokori == null)
+    {
+        tuihinokori = FindObjectOfType<Slider>();
+    }
         GenerateFloor();
     }
 
@@ -70,8 +74,8 @@ public class CreateFloor : MonoBehaviour
         }
     }
 
-    tuihinokori.maxValue = countField;
-    tuihinokori.value = countField;
+   tuihinokori.maxValue = countField;
+   tuihinokori.value = countField;
 }
     
     void Update()

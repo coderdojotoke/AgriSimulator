@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-
+using TMPro;
 public class SunMoveTest : MonoBehaviour
 {
-    public InputField dateInput;
-    public InputField latitudeInput;
-    public InputField longitudeInput;
+    public TMP_InputField dateInput;
+    public TMP_InputField latitudeInput;
+    public TMP_InputField longitudeInput;
     public Slider timeSlider;
     public Light sunLight;
 
